@@ -46,11 +46,11 @@ class ItemController extends Controller
         $item->title = request('title');
         $item->dueDate = request('dueDate');
         $item->remain = request('remain');
-        $item->idUser = 3;
+        $item->idUser = \Auth::id();
         $item->idGroup = request('group');
         $item->save();
 
-        return 'Item has been create!';
+        return view('item.index');
     }
 
     /**
