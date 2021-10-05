@@ -15,6 +15,8 @@ class ItemController extends Controller
     public function index()
     {
         //
+
+        return view('item.index');
     }
 
     /**
@@ -25,6 +27,8 @@ class ItemController extends Controller
     public function create()
     {
         //
+
+        return view('item.create');
     }
 
     /**
@@ -36,6 +40,17 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         //
+        //dd($request->all());
+
+        $item = new Item;
+        $item->title = request('title');
+        $item->dueDate = request('dueDate');
+        $item->remain = request('remain');
+        $item->idUser = 3;
+        $item->idGroup = request('group');
+        $item->save();
+
+        return 'Item has been create!';
     }
 
     /**
