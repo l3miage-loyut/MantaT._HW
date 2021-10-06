@@ -17,10 +17,10 @@ class CreateItemsTable extends Migration
             $table->id();
 
             $table->integer('idUser');
-            $table->integer('idGroup');
+            $table->integer('idGroup')->nullable();
             $table->string('title', 200);
             $table->date('dueDate');
-            $table->integer('remain');
+            $table->integer('days_to_remind')->nullable();
 
             $table->timestamps();
         });

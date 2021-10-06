@@ -45,7 +45,7 @@ class ItemController extends Controller
         $item = new Item;
         $item->title = request('title');
         $item->dueDate = request('dueDate');
-        $item->remain = request('remain');
+        $item->days_to_remind = request('days_to_remind');
         $item->idUser = \Auth::id();
         $item->idGroup = request('group');
         $item->save();
