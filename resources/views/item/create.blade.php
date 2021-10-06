@@ -26,16 +26,24 @@
                     <label>Title*</label>
                     <input type="text" class="form-control" id='title' name="title"></input>
                 </div>
-                <div class="form-group">
-                    <label>Select a group</label>
-                    <select class="form-control" id="group" name="group">
-                        <option value="" disabled selected>Choose option</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                <div class="form-group" style="margin-bottom: 0rem;">
+                    <label>Group</label>
+                </div>
+                <div class="form-row" style="margin-bottom: 1rem;">
+                    <div class="col">
+                        <select class="form-control" id="select_group" name="select_group">
+                            <option value="" disabled selected>Select a group</option>
+                            @foreach (App\Models\Group::all() as $group)
+                                @if ($group->idUser == \Auth::id())
+                                    <option value="$group->id">{{ $group->title }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    or
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Create a group" id="create_group" name="create_group">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Due Date*</label>

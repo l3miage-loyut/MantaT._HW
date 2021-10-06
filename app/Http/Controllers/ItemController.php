@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Group;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -47,7 +48,24 @@ class ItemController extends Controller
         $item->dueDate = request('dueDate');
         $item->days_to_remind = request('days_to_remind');
         $item->idUser = \Auth::id();
-        $item->idGroup = request('group');
+
+        if (request('create_group')!="") {
+
+            //echo "you create a group";
+            $group = new Group;
+            $group->title = request('create_group');
+            $group->idUser = \Auth::id();
+            $group->save();
+
+            $item->idGroup = $group->id;
+        } elseif (request('select_group')!=null) {
+
+            //echo "you select a group";
+            $item->idGroup = request('select_group');
+        } else {
+            //echo "no group";
+        }
+
         $item->save();
 
         return view('item.index');
