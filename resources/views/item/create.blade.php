@@ -35,7 +35,7 @@
                             <option value="" disabled selected>Select a group</option>
                             @foreach (App\Models\Group::all() as $group)
                                 @if ($group->idUser == \Auth::id())
-                                    <option value="$group->id">{{ $group->title }}</option>
+                                    <option value="{{ $group->id }}">{{ $group->title }}</option>
                                 @endif
                             @endforeach
                         </select>
