@@ -43,6 +43,11 @@ class ItemController extends Controller
         //
         //dd($request->all());
 
+        $request->validate([
+            'title' => 'required',
+            'dueDate' => 'required'
+        ]);
+
         $item = new Item;
         $item->title = request('title');
         $item->dueDate = request('dueDate');

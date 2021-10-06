@@ -7,6 +7,7 @@
 <script type="text/javascript">
     $(function() {
         $('#dueDate').datepicker({
+            startDate: new Date(),
             format: 'yyyy-mm-dd'
         });
     });
@@ -19,6 +20,16 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h2>Create a todo item</h2>
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ui>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ui>
+                </div>
+            @endif
 
             <form action="{{ route('items.store') }}" method="post">
                 @csrf
