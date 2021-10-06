@@ -35,7 +35,16 @@
                     @if ($post->idUser == \Auth::id())
                     <tr>
                         <td>{{ $post->title }}</td>
-                        <td>{{ $post->idGroup }}</td>
+
+                        <?php
+                            $group = App\Models\Group::find($post->idGroup);
+                            if ($group == null) {
+                                $group_title = "";
+                            } else {
+                                $group_title = $group->title;
+                            }
+                        ?>
+                        <td>{{ $group_title }}</td>
                         <td>{{ $post->dueDate }}</td>
 
                         <?php
