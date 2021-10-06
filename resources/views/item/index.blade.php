@@ -1,31 +1,46 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- Styles -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h2>My TODO List</h2>
-            <div class="card">
-                <table>
+            <h2>My ToDo List</h2>
+            <table class="table table-striped table-bordered" id="sortTable">
+                <thead>
                     <tr>
-                        <td class="card-header">Title</td>
-                        <td class="card-header">Group</td>
-                        <td class="card-header">Due Date</td>
-                        <td class="card-header">Days Remain</td>
+                        <th>Title</th>
+                        <th>Group</th>
+                        <th>Due Date</th>
+                        <th>Days Remain</th>
                     </tr>
-
+                </thead>
+                <tbody>
                     @foreach (App\Models\Item::all() as $post)
-                    @if ($post->idUser == \Auth::id())<tr>
-                        <td class="card-body">{{ $post->title }}</td>
-                        <td class="card-body">{{ $post->idGroup }}</td>
-                        <td class="card-body">{{ $post->dueDate }}</td>
-                        <td class="card-body">{{ $post->remain }}</td>
+                    @if ($post->idUser == \Auth::id())
+                    <tr>
+                        <td>{{ $post->title }}</td>
+                        <td>{{ $post->idGroup }}</td>
+                        <td>{{ $post->dueDate }}</td>
+                        <td>{{ $post->remain }}</td>
                     </tr>
                     @endif
                     @endforeach
-
-                </table>
-            </div>
+                </tbody>
+            </table>
+            <script>
+                $('#sortTable').DataTable();
+            </script>
         </div>
     </div>
 </div>

@@ -1,6 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Scripts -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('#dueDate').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+    });
+</script>
+
+<!-- Styles -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css">
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
