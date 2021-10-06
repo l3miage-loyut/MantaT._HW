@@ -37,7 +37,14 @@
                         <td>{{ $post->title }}</td>
                         <td>{{ $post->idGroup }}</td>
                         <td>{{ $post->dueDate }}</td>
-                        <td>{{ $post->remain }}</td>
+
+                        <?php
+                            $now = time();
+                            $due_date = strtotime($post->dueDate);
+                            $datediff = $due_date - $now;
+                            $remain = round($datediff / (60 * 60 * 24));
+                        ?>
+                        <td>{{ $remain }}</td>
                     </tr>
                     @endif
                     @endforeach
