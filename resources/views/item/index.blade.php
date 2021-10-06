@@ -2,20 +2,25 @@
 
 @section('content')
 <!-- Scripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 
 <!-- Styles -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <h2>My ToDo List</h2>
+        </div>
+        <div class="col-md-2">
+            <a href="{{ url('/items/create') }}" style="float: right;">add item</a>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
             <table class="table table-striped table-bordered" id="sortTable">
                 <thead>
                     <tr>
