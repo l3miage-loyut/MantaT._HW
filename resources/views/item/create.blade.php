@@ -55,6 +55,15 @@
                     <div class="col">
                         <input type="text" class="form-control" placeholder="Create a group" id="create_group" name="create_group">
                     </div>
+
+                    <script>
+                        $('#create_group').on('change', function() {
+                            if($(this).length > 0) {
+                                $('#select_group option').get(0).selected = true;
+                            }
+                        });
+                    </script>
+
                 </div>
                 <div class="form-group">
                     <label>Due Date*</label>
