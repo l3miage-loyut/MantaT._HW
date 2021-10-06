@@ -53,7 +53,11 @@
                             $datediff = $due_date - $now;
                             $remain = round($datediff / (60 * 60 * 24));
                         ?>
-                        <td>{{ $remain }}</td>
+                        @if ($remain <= 0)
+                            <td style="color:red;">{{ $remain }}</td>
+                        @else
+                            <td>{{ $remain }}</td>
+                        @endif
                     </tr>
                     @endif
                     @endforeach
