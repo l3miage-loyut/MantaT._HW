@@ -46,8 +46,7 @@ class DailyMessage extends Command
             $datediff = $due_date - $now;
             $remain = round($datediff / (60 * 60 * 24));
 
-            //if ($remain == $item->days_to_remind) {
-            if ($remain == 1) {
+            if ($remain == $item->days_to_remind) {
                 $idUser = $item->idUser;
                 $user = User::find($idUser);
                 $name = $user->name;
