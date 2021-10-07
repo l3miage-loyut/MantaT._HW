@@ -53,19 +53,27 @@
                             $due_date = strtotime($item->dueDate);
                             $datediff = $due_date - $now;
                             $remain = round($datediff / (60 * 60 * 24));
+                            $remain==-0 ? $remain=0 : null;
                         ?>
-                        @if ($remain <= 0) <td style="color:red;">{{ $remain }}</td>
-                            <td>
-                                <form action="{{ route('items.destroy', [$item->id]) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-link">delete</button>
-                                </form>
-                            </td>
+                        @if ($remain <= 0)
+                            <td style="color:red;">{{ $remain }}</td>
                         @else
                             <td>{{ $remain }}</td>
-                            <td>edit</td>
+                            <!--
+                            <td>
+                                <form>
+                                    <button type="button" class="btn btn-link" style="padding: 0px;">edit</button>
+                                </form>
+                            </td>
+                            -->
                         @endif
+                        <td>
+                            <form action="{{ route('items.destroy', [$item->id]) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-link" style="padding: 0px;">delete</button>
+                            </form>
+                        </td>
                     </tr>
                     @endif
                     @endforeach
