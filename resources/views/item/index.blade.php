@@ -28,16 +28,17 @@
                         <th>Group</th>
                         <th>Due Date</th>
                         <th>Days Remain</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (App\Models\Item::all() as $post)
-                    @if ($post->idUser == \Auth::id())
+                    @foreach (App\Models\Item::all() as $item)
+                    @if ($item->idUser == \Auth::id())
                     <tr>
-                        <td>{{ $post->title }}</td>
+                        <td>{{ $item->title }}</td>
 
                         <?php
-                            $group = App\Models\Group::find($post->idGroup);
+                            $group = App\Models\Group::find($item->idGroup);
                             if ($group == null) {
                                 $group_title = "";
                             } else {
@@ -45,18 +46,25 @@
                             }
                         ?>
                         <td>{{ $group_title }}</td>
-                        <td>{{ $post->dueDate }}</td>
+                        <td>{{ $item->dueDate }}</td>
 
                         <?php
                             $now = time();
-                            $due_date = strtotime($post->dueDate);
+                            $due_date = strtotime($item->dueDate);
                             $datediff = $due_date - $now;
                             $remain = round($datediff / (60 * 60 * 24));
                         ?>
-                        @if ($remain <= 0)
-                            <td style="color:red;">{{ $remain }}</td>
+                        @if ($remain <= 0) <td style="color:red;">{{ $remain }}</td>
+                            <td>
+                                <form action="{{ route('items.destroy', [$item->id]) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-link">delete</button>
+                                </form>
+                            </td>
                         @else
                             <td>{{ $remain }}</td>
+                            <td>edit</td>
                         @endif
                     </tr>
                     @endif
