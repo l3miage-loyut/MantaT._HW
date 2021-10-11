@@ -57,12 +57,24 @@ class ItemController extends Controller
         if (request('create_group')!="") {
 
             //echo "you create a group";
-            $group = new Group;
-            $group->title = request('create_group');
-            $group->idUser = \Auth::id();
-            $group->save();
 
-            $item->idGroup = $group->id;
+            $group_exist = false;
+            foreach (Group::all() as $group) {
+                if($group->idUser == \Auth::id() && $group->title == request('create_group')){
+                    $group_exist = true;
+                    $item->idGroup = $group->id;
+                    break;
+                }
+            }
+
+            if(!$group_exist){
+                $group = new Group;
+                $group->title = request('create_group');
+                $group->idUser = \Auth::id();
+                $group->save();
+                $item->idGroup = $group->id;
+            }
+
         } elseif (request('select_group')!=null) {
 
             //echo "you select a group";
