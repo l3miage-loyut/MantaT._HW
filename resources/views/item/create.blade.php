@@ -22,13 +22,13 @@
             <h2>Create a todo item</h2>
 
             @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ui>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ui>
-                </div>
+            <div class="alert alert-danger">
+                <ui>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ui>
+            </div>
             @endif
 
             <form action="{{ route('items.store') }}" method="post">
@@ -49,17 +49,20 @@
                                     <option value="{{ $group->id }}">{{ $group->title }}</option>
                                 @endif
                             @endforeach
+                            <option value="OTHER">Others...</option>
                         </select>
                     </div>
                     or
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Create a group" id="create_group" name="create_group">
+                        <input type="text" class="form-control" placeholder="Create a group" id="create_group" name="create_group" disabled>
                     </div>
 
                     <script>
-                        $('#create_group').on('change', function() {
-                            if($(this).length > 0) {
-                                $('#select_group option').get(0).selected = true;
+                        $('#select_group').on('change', function() {
+                            if ($('#select_group').val() == 'OTHER') {
+                                $('#create_group').removeAttr('disabled');
+                            } else {
+                                $('#create_group').attr('disabled','disabled');
                             }
                         });
                     </script>

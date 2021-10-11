@@ -54,7 +54,7 @@ class ItemController extends Controller
         $item->days_to_remind = request('days_to_remind');
         $item->idUser = \Auth::id();
 
-        if (request('create_group')!="") {
+        if (request('select_group') == 'OTHER' && request('create_group')!="") {
 
             //echo "you create a group";
 
