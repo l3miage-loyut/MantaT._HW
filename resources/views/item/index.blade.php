@@ -28,14 +28,13 @@
                         <th>Group</th>
                         <th>Due Date</th>
                         <th>Days Remain</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (App\Models\Item::all() as $item)
                     @if ($item->idUser == \Auth::id())
                     <tr>
-                        <td>{{ $item->title }}</td>
+                        <td>{{ $item->title }} (<a href="{{ route('items.edit', [$item->id]) }}">Edit</a>)</td>
 
                         <?php
                             $group = App\Models\Group::find($item->idGroup);
@@ -59,21 +58,7 @@
                             <td style="color:red;">{{ $remain }}</td>
                         @else
                             <td>{{ $remain }}</td>
-                            <!--
-                            <td>
-                                <form>
-                                    <button type="button" class="btn btn-link" style="padding: 0px;">edit</button>
-                                </form>
-                            </td>
-                            -->
                         @endif
-                        <td>
-                            <form action="{{ route('items.destroy', [$item->id]) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-link" style="padding: 0px;">delete</button>
-                            </form>
-                        </td>
                     </tr>
                     @endif
                     @endforeach

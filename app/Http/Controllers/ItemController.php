@@ -108,6 +108,10 @@ class ItemController extends Controller
     public function edit(Item $item)
     {
         //
+
+        //dd($item);
+
+        return view('item.edit', compact('item'));
     }
 
     /**
@@ -120,6 +124,47 @@ class ItemController extends Controller
     public function update(Request $request, Item $item)
     {
         //
+
+        $request->validate([
+            'title' => 'required',
+            'dueDate' => 'required'
+        ]);
+
+        $item->title = request('title');
+        $item->dueDate = request('dueDate');
+        $item->days_to_remind = request('days_to_remind');
+
+        if (request('select_group') == 'OTHER' && request('create_group') != "") {
+
+            //echo "you create a group";
+
+            $group_exist = false;
+            foreach (Group::all() as $group) {
+                if ($group->idUser == \Auth::id() && $group->title == request('create_group')) {
+                    $group_exist = true;
+                    $item->idGroup = $group->id;
+                    break;
+                }
+            }
+
+            if (!$group_exist) {
+                $group = new Group;
+                $group->title = request('create_group');
+                $group->idUser = \Auth::id();
+                $group->save();
+                $item->idGroup = $group->id;
+            }
+        } elseif (request('select_group') != null) {
+
+            //echo "you select a group";
+            $item->idGroup = request('select_group');
+        } else {
+            //echo "no group";
+        }
+
+        $item->save();
+
+        return redirect()->route('items.edit', [$item->id])->with('success', true);
     }
 
     /**
