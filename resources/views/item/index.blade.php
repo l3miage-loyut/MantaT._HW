@@ -52,7 +52,7 @@
                             $now = time();
                             $due_date = strtotime($item->dueDate);
                             $datediff = $due_date - $now;
-                            $remain = round($datediff / (60 * 60 * 24));
+                            $remain = ceil($datediff / (60 * 60 * 24));
                             $remain==-0 ? $remain=0 : null;
                         ?>
                         @if ($remain <= 0)
