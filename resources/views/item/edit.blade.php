@@ -50,7 +50,12 @@
                 <div class="form-row" style="margin-bottom: 1rem;">
                     <div class="col">
                         <select class="form-control" id="select_group" name="select_group">
-                            <option value="" disabled>Select a group</option>
+                            @if($item->idGroup == null)
+                                <option value="" disabled selected>Select a group</option>
+                            @else
+                                <option value="" disabled>Select a group</option>
+                            @endif
+
                             @foreach (App\Models\Group::all() as $group)
                                 @if ($group->idUser == \Auth::id())
                                     @if ($group->id == $item->idGroup)
