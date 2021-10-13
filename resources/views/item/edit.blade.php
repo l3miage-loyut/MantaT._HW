@@ -19,7 +19,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h2>Create a todo item</h2>
+            <h2>Edit item</h2>
 
             @if (session('success'))
             <div class="alert alert-success">
