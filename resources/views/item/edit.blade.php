@@ -58,19 +58,28 @@
 
                             @foreach (App\Models\Group::all() as $group)
                                 @if ($group->idUser == \Auth::id())
-                                    @if ($group->id == $item->idGroup)
+                                    @if ($group->id == old('select_group', $item->idGroup))
                                         <option value="{{ $group->id }}" selected>{{ $group->title }}</option>
                                     @else
                                         <option value="{{ $group->id }}">{{ $group->title }}</option>
                                     @endif
                                 @endif
                             @endforeach
-                            <option value="OTHER">Others...</option>
+
+                            @if(old('select_group') == 'OTHER')
+                                <option value="OTHER" selected>Others...</option>
+                            @else
+                                <option value="OTHER">Others...</option>
+                            @endif
                         </select>
                     </div>
                     or
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Create a group" id="create_group" name="create_group" disabled>
+                        @if(old('select_group') == 'OTHER')
+                            <input type="text" class="form-control" placeholder="Create a group" id="create_group" name="create_group" value="{{ old('create_group') }}">
+                        @else
+                            <input type="text" class="form-control" placeholder="Create a group" id="create_group" name="create_group" disabled value="{{ old('create_group') }}">
+                        @endif
                     </div>
 
                     <script>
